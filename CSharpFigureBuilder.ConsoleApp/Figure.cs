@@ -26,6 +26,12 @@ namespace CSharpFigureBuilder.ConsoleApp
             Filled = Fill;
         }
 
-        // Now I gotta think of a way to sort the flow, the switch case rollercoaster is ugly
+        // func Tri >> filled or unfilled
+
+        // func Tri invert >> filled or unfilled
+
+        // funt Diamond >> filled(extra) or unfilled
+
+        // func BuildFig (control flow, which function to call)
     }
 }

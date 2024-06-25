@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,14 @@ namespace CSharpFigureBuilder.ConsoleApp
                 output += sign;
             Console.WriteLine(output);
             Console.ForegroundColor = ConsoleColor.White;
+        }
+        public void YNValidator(string Choice)
+        {
+            if (Choice != "Y" && Choice != "N")
+            {
+                WriteCLine("Invalid input, start over", ConsoleColor.Red);
+                return;
+            }
         }
     }
 }

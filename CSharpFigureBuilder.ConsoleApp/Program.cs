@@ -14,13 +14,9 @@ namespace CSharpFigureBuilder.ConsoleApp
         //    switch (Shape)
         //    {
         //        case "1":  // triangle 
-        //            WriteCLine("Would you like to have your triangle Inverted? Y/N: ", newline: false);
-        //            string Inversion = ReadCLine(ConsoleColor.Yellow).ToUpper();
         //            switch (Inversion)
         //            {
-        //                case "Y":  // inverted (Triangle)
-        //                    WriteCLine("Would you like to have your triangle Filled? Y/N: ", newline: false);
-        //                    string Filled = ReadCLine(ConsoleColor.Yellow).ToUpper();
+        //                case "Y":  // inverted (Triangle)    
         //                    switch (Filled)
         //                    {
         //                        case "Y":  // Filled
@@ -64,8 +60,7 @@ namespace CSharpFigureBuilder.ConsoleApp
         //                            break;
         //                        default:
         //                            Success = false;
-        //                            WriteCLine("Invalid input, start over", ConsoleColor.Red);
-        //                            break;
+
         //                    }
         //                    break;
         //                case "N":  // not inverted (Triangle)
@@ -222,8 +217,7 @@ namespace CSharpFigureBuilder.ConsoleApp
             {
                 fun.Spammer('*', 54, ConsoleColor.Yellow);
                 fun.WriteCLine("Please insert the length of your desired shape: ", newline: false);
-                string Length = fun.ReadCLine(ConsoleColor.Yellow);
-                fun.Spammer('*', 54, ConsoleColor.Yellow);
+                string Length = fun.ReadCLine(ConsoleColor.Yellow);             
                 int ParsedLength = fun.intValidator(Length);
                 if (ParsedLength == 0)
                 {
@@ -232,6 +226,7 @@ namespace CSharpFigureBuilder.ConsoleApp
                 }
                 else
                 {
+                    fun.Spammer('*', 54, ConsoleColor.Yellow);
                     fun.Spammer('*', 54, ConsoleColor.Yellow);
                     fun.WriteCLine("Insert the char to be used as the building block: ", newline: false);
                     string BuildingBlock = fun.ReadCLine(ConsoleColor.Yellow, true);
@@ -248,7 +243,17 @@ namespace CSharpFigureBuilder.ConsoleApp
                     }
                     fun.Spammer('*', 54, ConsoleColor.Yellow);
 
-                    //Builder(ParsedLength, Shape, BuildingBlock);
+                    if(Shape == "1")
+                    {
+                        fun.WriteCLine("Would you like to have your triangle Inverted? Y/N: ", newline: false);
+                        string Inversion = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
+                        fun.YNValidator(Inversion);
+                        fun.WriteCLine("Would you like to have your triangle Filled? Y/N: ", newline: false);
+                        string Filled = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
+                        fun.YNValidator(Filled);
+                    }
+                    // make obj
+                    // future master function form Figure class (which calls smaller functions)
 
                     fun.WriteCLine("Would you like to Create Another Shape? Y/N: ", newline: false);
                     string Another = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
