@@ -196,7 +196,7 @@ namespace CSharpFigureBuilder.ConsoleApp
                                     Output += BB;
                                 Output += "\n";
                             }
-                            WriteCLine($"An Unfilled {BB} Diamond of a Center Width: {Len}");
+                            WriteCLine($"An Unfilled {BB} Diamond with a height of {Len} from the center");
                             break;
                         case "N":  // Unfilled
                             for (int row = 1; row <= Len; row++)
@@ -227,7 +227,7 @@ namespace CSharpFigureBuilder.ConsoleApp
                                 }
                                 Output += "\n";
                             }
-                            WriteCLine($"An Unfilled {BB} Diamond of a Center Width: {Len}");
+                            WriteCLine($"An Unfilled {BB} Diamond of a height of {Len} from the core");
                             break;
                     }
                     break;
@@ -235,6 +235,7 @@ namespace CSharpFigureBuilder.ConsoleApp
                     WriteCLine("Invalid input, start over", ConsoleColor.Red);
                     break;
             }
+            Spammer('*', 54, ConsoleColor.Yellow);
             Spammer('-', 54);
             WriteCLine($"\n{Output}", ConsoleColor.Green);
             Spammer('-', 54);
@@ -244,26 +245,26 @@ namespace CSharpFigureBuilder.ConsoleApp
             Console.Title = "ShapeBuilder";
             WriteCLine("");
             Spammer('*', 54, ConsoleColor.Cyan);
-            WriteCLine("SHAPE BUILDER CLI\n This Program will prompt you to choose a character\n Pick a shape \n Indicate whether it's Inverted or not \n And indicate whether it's filled or not");
+            WriteCLine("  SHAPE BUILDER CLI\n  This Program will prompt you to choose a character\n  Specify the Length\n  Pick a shape \n  Indicate whether it's Inverted or not \n  And indicate whether it's filled or not");
             Spammer('*', 54, ConsoleColor.Cyan);
             WriteCLine("");
 
-            Spammer('*', 54);
+            Spammer('*', 54, ConsoleColor.Yellow);
             WriteCLine("Please insert the length of your desired shape: ", newline: false);
             string Length = ReadCLine(ConsoleColor.Yellow);
-            Spammer('*', 54);
+            Spammer('*', 54, ConsoleColor.Yellow);
             int ParsedLength = intValidator(Length);
             if (ParsedLength == 0)
                 WriteCLine("Invalid length, start over", ConsoleColor.Red);
             else
             {
-                Spammer('*', 54);
+                Spammer('*', 54, ConsoleColor.Yellow);
                 WriteCLine("Insert the char to be used as the building block: ", newline: false);
                 string BuildingBlock = ReadCLine(ConsoleColor.Yellow, true);
-                Spammer('*', 54);
+                Spammer('*', 54, ConsoleColor.Yellow);
 
-                Spammer('*', 54);
-                WriteCLine("Choose one from the listed shapes: \n  --[1] Triangle-- \n  --[2] Diamond ");
+                Spammer('*', 54, ConsoleColor.Yellow);
+                WriteCLine("Choose one from the listed shapes: \n  --[1] Triangle [1]-- \n  --[2] Diamond  [2]-- ");
                 WriteCLine("Insert your option: ", newline: false);
                 string Shape = ReadCLine(ConsoleColor.Yellow, true);
                 if(Shape != "1" && Shape != "2")
@@ -271,11 +272,11 @@ namespace CSharpFigureBuilder.ConsoleApp
                     WriteCLine("Invalid input, start over", ConsoleColor.Red);
                     return;
                 }                 
-                Spammer('*', 54);
+                Spammer('*', 54, ConsoleColor.Yellow);
 
                 Builder(ParsedLength, Shape, BuildingBlock);
             }
-            WriteCLine("That's it, press any key to end the program: ", ConsoleColor.Magenta, false);
+            WriteCLine("That's it, press any key to end the program: ", ConsoleColor.Cyan, false);
             Console.ReadKey();
 
         }
