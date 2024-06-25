@@ -36,6 +36,7 @@ namespace CSharpFigureBuilder.ConsoleApp
             {
                 int ascii = Console.ReadKey().KeyChar;
                 char charinput = (char)ascii;
+                Console.WriteLine();
                 return charinput.ToString(); 
             }
             else
@@ -136,7 +137,12 @@ namespace CSharpFigureBuilder.ConsoleApp
                 Spammer('*', 52);
                 WriteCLine("Choose one from the listed shapes: \n  --[1] Triangle-- \n  --[2] Diamond ");
                 WriteCLine("Insert your option: ", newline: false);
-                string shape = ReadCLine(ConsoleColor.Yellow);
+                string shape = ReadCLine(ConsoleColor.Yellow, true);
+                if(shape != "1" && shape != "2")
+                {
+                    WriteCLine("Invalid input, start over", ConsoleColor.Red);
+                    return;
+                }                 
                 Spammer('*', 52);
 
                 Spammer('*', 52);
