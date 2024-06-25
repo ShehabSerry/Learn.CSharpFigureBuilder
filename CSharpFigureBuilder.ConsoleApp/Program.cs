@@ -148,7 +148,6 @@ namespace CSharpFigureBuilder.ConsoleApp
                 Spammer('*', 52);
                 WriteCLine("Insert the char to be used as the building block: ", newline:false);
                 string BuildingBlock = ReadCLine(ConsoleColor.Yellow, true);
-                WriteCLine("");
                 Spammer('*', 52);
             }
 
