@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace CSharpFigureBuilder.ConsoleApp
 {
-    // As of what has been written on Sunday
     class Program
     {
         static int intValidator(string input)
@@ -29,10 +28,19 @@ namespace CSharpFigureBuilder.ConsoleApp
                 Console.Write(text);
             Console.ForegroundColor = ConsoleColor.White;
         }
-        static string ReadCLine(ConsoleColor color = ConsoleColor.White)
+        static string ReadCLine(ConsoleColor color = ConsoleColor.White, bool single = false)
         {
+            string input = "";
             Console.ForegroundColor = color;
-            string input = Console.ReadLine();
+            if (single)
+            {
+                int ascii = Console.ReadKey().KeyChar;
+                char charinput = (char)ascii;
+                return charinput.ToString(); 
+            }
+            else
+                input = Console.ReadLine();
+
             Console.ForegroundColor = ConsoleColor.White;
             return input;
         }
@@ -54,28 +62,53 @@ namespace CSharpFigureBuilder.ConsoleApp
                     string Inversion = ReadCLine(ConsoleColor.Yellow).ToUpper();
                     switch (Inversion)
                     {
-                        case "Y":  // inverted
+                        case "Y":  // inverted (Triangle)
                             WriteCLine("Would you like to have your triangle Filled? Y/N: ", newline: false);
                             string Filled = ReadCLine(ConsoleColor.Yellow).ToUpper();
                             switch (Filled)
                             {
-                                case "Y":
+                                case "Y":  // Filled
 
                                     break;
-                                case "N":
+                                case "N":  // Unfilled
 
                                     break;
-
+                                default:
+                                    WriteCLine("Invalid input, start over", ConsoleColor.Red);
+                                    break;
                             }
-
                             break;
-                        case "N":  // not inverted
+                        case "N":  // not inverted (Triangle)
+                            WriteCLine("Would you like to have your triangle Filled? Y/N: ", newline: false);
+                            Filled = ReadCLine(ConsoleColor.Yellow).ToUpper();
+                            switch (Filled)
+                            {
+                                case "Y":  // Filled (Triangle)
+
+                                    break;
+                                case "N":  // Unfilled (Triangle)
+
+                                    break;
+                                default:
+                                    WriteCLine("Invalid input, start over", ConsoleColor.Red);
+                                    break;
+                            }
                             break;
                     }
                     break;
 
                 case "2": // Diamond
+                    WriteCLine("Would you like to have your Diamond Filled? Y/N: ", newline: false);
+                    string FilledD = ReadCLine(ConsoleColor.Yellow).ToUpper();
+                    switch (FilledD)
+                    {
+                        case "Y":  // Filled Extra
 
+                            break;
+                        case "N":  // Unfilled
+
+                            break;
+                    }
                     break;
                 default:
                     WriteCLine("Invalid input, start over", ConsoleColor.Red);
@@ -91,27 +124,29 @@ namespace CSharpFigureBuilder.ConsoleApp
             Spammer('*', 52, ConsoleColor.Cyan);
             WriteCLine("");
 
-            Spammer('*', 40);
-            WriteCLine("Please insert the size of the length: ", newline: false);
+            Spammer('*', 52);
+            WriteCLine("Please insert the length of your desired shape: ", newline: false);
             string length = ReadCLine(ConsoleColor.Yellow);
-            Spammer('*', 40);
+            Spammer('*', 52);
             int ParsedLength = intValidator(length);
             if (ParsedLength == 0)
                 WriteCLine("Invalid length, start over", ConsoleColor.Red);
             else
             {
-                Spammer('*', 40);
+                Spammer('*', 52);
                 WriteCLine("Choose one from the listed shapes: \n  --[1] Triangle-- \n  --[2] Diamond ");
                 WriteCLine("Insert your option: ", newline: false);
                 string shape = ReadCLine(ConsoleColor.Yellow);
-                Spammer('*', 40);
+                Spammer('*', 52);
+
+                Spammer('*', 52);
+                WriteCLine("Insert the char to be used as the building block: ", newline:false);
+                string BuildingBlock = ReadCLine(ConsoleColor.Yellow, true);
+                WriteCLine("");
+                Spammer('*', 52);
             }
 
             Console.ReadKey();
-
-
-
-
 
         }
     }
