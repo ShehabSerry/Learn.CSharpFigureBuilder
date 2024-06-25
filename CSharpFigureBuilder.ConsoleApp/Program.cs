@@ -8,14 +8,9 @@ namespace CSharpFigureBuilder.ConsoleApp
 {
     class Program
     {
-        // I moved my user defined functions into "Functions" Class
-        // I will try to handle the builder function
+        //I will try to handle the builder function
         //static void Builder(int Length, string Shape, string BuildingBlock)
         //{
-        //    int Len = Length;
-        //    string BB = BuildingBlock;
-        //    string Output = "";
-        //    bool Success = true;
         //    switch (Shape)
         //    {
         //        case "1":  // triangle 
@@ -96,7 +91,7 @@ namespace CSharpFigureBuilder.ConsoleApp
         //                        case "N":  // Unfilled (Triangle)
         //                            for (int row = 1; row <= Len; row++)
         //                            {
-        //                                if(row == Len)
+        //                                if (row == Len)
         //                                {
         //                                    for (int BaseWidth = 1; BaseWidth < row * 2; BaseWidth++)  // if x = 5, base = 9: 4 - center - 4
         //                                        Output += BB;
@@ -107,7 +102,7 @@ namespace CSharpFigureBuilder.ConsoleApp
 
         //                                for (int block = 1; block < row * 2; block++)
         //                                {
-        //                                    if(block == 1 || block == (row * 2) - 1)  
+        //                                    if (block == 1 || block == (row * 2) - 1)
         //                                        Output += BB;
         //                                    else
         //                                        Output += " ";
@@ -195,7 +190,7 @@ namespace CSharpFigureBuilder.ConsoleApp
         //                default:
         //                    Success = false;
         //                    WriteCLine("Invalid input, start over", ConsoleColor.Red);
-        //                    break;           
+        //                    break;
         //            }
         //            break;
         //        default:
@@ -204,7 +199,7 @@ namespace CSharpFigureBuilder.ConsoleApp
         //            break;
         //    }
         //    Spammer('*', 54, ConsoleColor.Yellow);
-        //    if(Success)
+        //    if (Success)
         //    {
         //        Spammer('-', 54);
         //        WriteCLine($"\n{Output}", ConsoleColor.Green);
