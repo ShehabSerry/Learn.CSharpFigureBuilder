@@ -54,9 +54,12 @@ namespace CSharpFigureBuilder.ConsoleApp
             Console.WriteLine(output);
             Console.ForegroundColor = ConsoleColor.White;
         }
-        static void Brain(string Choice)
+        static void Builder(int Length, string Shape, string BuildingBlock)
         {
-            switch (Choice)
+            int Len = Length;
+            string BB = BuildingBlock;
+            string Output = "";
+            switch (Shape)
             {
                 case "1":  // triangle 
                     WriteCLine("Would you like to have your triangle Inverted? Y/N: ", newline: false);
@@ -85,7 +88,19 @@ namespace CSharpFigureBuilder.ConsoleApp
                             switch (Filled)
                             {
                                 case "Y":  // Filled (Triangle)
+                                    for (int row = 1; row <= Len; row++)
+                                    {
+                                        for (int spaces = Len - row; spaces > 0; spaces--)  // spacer
+                                            Output += " ";
 
+                                        for (int block = 0; block < row; block++)
+                                            Output += BB;
+
+                                        for (int RHS = 0; RHS < row - 1; RHS++)  // after midpoint
+                                            Output += BB;
+                                        Output += "\n";
+                                    }
+                                    WriteCLine($"A Non-Inverted, '{BB}' Filled Triangle of Height: {Len}");
                                     break;
                                 case "N":  // Unfilled (Triangle)
 
@@ -115,40 +130,45 @@ namespace CSharpFigureBuilder.ConsoleApp
                     WriteCLine("Invalid input, start over", ConsoleColor.Red);
                     break;
             }
+            Spammer('-', 54);
+            WriteCLine($"\n{Output}", ConsoleColor.Green);
+            Spammer('-', 54);
         }
         static void Main(string[] args)
         {
             Console.Title = "ShapeBuilder";
             WriteCLine("");
-            Spammer('*', 52, ConsoleColor.Cyan);
+            Spammer('*', 54, ConsoleColor.Cyan);
             WriteCLine("SHAPE BUILDER CLI\n This Program will prompt you to choose a character\n Pick a shape \n Indicate whether it's Inverted or not \n And indicate whether it's filled or not");
-            Spammer('*', 52, ConsoleColor.Cyan);
+            Spammer('*', 54, ConsoleColor.Cyan);
             WriteCLine("");
 
-            Spammer('*', 52);
+            Spammer('*', 54);
             WriteCLine("Please insert the length of your desired shape: ", newline: false);
-            string length = ReadCLine(ConsoleColor.Yellow);
-            Spammer('*', 52);
-            int ParsedLength = intValidator(length);
+            string Length = ReadCLine(ConsoleColor.Yellow);
+            Spammer('*', 54);
+            int ParsedLength = intValidator(Length);
             if (ParsedLength == 0)
                 WriteCLine("Invalid length, start over", ConsoleColor.Red);
             else
             {
-                Spammer('*', 52);
+                Spammer('*', 54);
+                WriteCLine("Insert the char to be used as the building block: ", newline: false);
+                string BuildingBlock = ReadCLine(ConsoleColor.Yellow, true);
+                Spammer('*', 54);
+
+                Spammer('*', 54);
                 WriteCLine("Choose one from the listed shapes: \n  --[1] Triangle-- \n  --[2] Diamond ");
                 WriteCLine("Insert your option: ", newline: false);
-                string shape = ReadCLine(ConsoleColor.Yellow, true);
-                if(shape != "1" && shape != "2")
+                string Shape = ReadCLine(ConsoleColor.Yellow, true);
+                if(Shape != "1" && Shape != "2")
                 {
                     WriteCLine("Invalid input, start over", ConsoleColor.Red);
                     return;
                 }                 
-                Spammer('*', 52);
+                Spammer('*', 54);
 
-                Spammer('*', 52);
-                WriteCLine("Insert the char to be used as the building block: ", newline:false);
-                string BuildingBlock = ReadCLine(ConsoleColor.Yellow, true);
-                Spammer('*', 52);
+                Builder(ParsedLength, Shape, BuildingBlock);
             }
 
             Console.ReadKey();
