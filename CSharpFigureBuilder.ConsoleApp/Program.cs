@@ -74,17 +74,17 @@ namespace CSharpFigureBuilder.ConsoleApp
                                 case "Y":  // Filled
                                     for (int row = Len; row > 0; row--)
                                     {
-                                        for (int spaces = Len - row; spaces > 0; spaces--)
+                                        for (int spaces = Len - row; spaces > 0; spaces--)  // spacer
                                             Output += " ";
 
                                         for (int block = 0; block < row; block++)
                                             Output += BB;
 
-                                        for (int RHS = 0; RHS < row - 1; RHS++)
+                                        for (int RHS = 0; RHS < row - 1; RHS++)  // after centerline
                                             Output += BB;
                                         Output += "\n";
                                     }
-                                    WriteCLine($"A Non-Inverted, '{BB}' Filled Triangle of Height: {Len}");
+                                    WriteCLine($"An Inverted, '{BB}' Filled Triangle of Height: {Len}");
                                     break;
                                 case "N":  // Unfilled
 
@@ -102,20 +102,40 @@ namespace CSharpFigureBuilder.ConsoleApp
                                 case "Y":  // Filled (Triangle)
                                     for (int row = 1; row <= Len; row++)
                                     {
-                                        for (int spaces = Len - row; spaces > 0; spaces--)  // spacer
+                                        for (int spaces = Len - row; spaces > 0; spaces--)
                                             Output += " ";
 
                                         for (int block = 0; block < row; block++)
                                             Output += BB;
 
-                                        for (int RHS = 0; RHS < row - 1; RHS++)  // after midpoint
+                                        for (int RHS = 0; RHS < row - 1; RHS++)
                                             Output += BB;
                                         Output += "\n";
                                     }
                                     WriteCLine($"A Non-Inverted, '{BB}' Filled Triangle of Height: {Len}");
                                     break;
                                 case "N":  // Unfilled (Triangle)
+                                    for (int row = 1; row <= Len; row++)
+                                    {
+                                        if(row == Len)
+                                        {
+                                            for (int BaseWidth = 1; BaseWidth < row * 2; BaseWidth++)  // if x = 5, base = 9: 4 - center - 4
+                                                Output += BB;
+                                            break;
+                                        }
+                                        for (int spaces = Len - row - 1; spaces > 0; spaces--)
+                                            Output += " ";
 
+                                        for (int block = 0; block < row * 2; block++)
+                                        {
+                                            if(block == 1 || block == (row * 2) - 1)  
+                                                Output += BB;
+                                            else
+                                                Output += " ";
+                                        }
+                                        Output += "\n";
+                                    }
+                                    WriteCLine($"A Non-Inverted, '{BB}' Unfilled Triangle of Height: {Len}");
                                     break;
                                 default:
                                     WriteCLine("Invalid input, start over", ConsoleColor.Red);
