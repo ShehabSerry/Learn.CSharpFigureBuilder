@@ -72,7 +72,19 @@ namespace CSharpFigureBuilder.ConsoleApp
                             switch (Filled)
                             {
                                 case "Y":  // Filled
+                                    for (int row = Len; row > 0; row--)
+                                    {
+                                        for (int spaces = Len - row; spaces > 0; spaces--)
+                                            Output += " ";
 
+                                        for (int block = 0; block < row; block++)
+                                            Output += BB;
+
+                                        for (int RHS = 0; RHS < row - 1; RHS++)
+                                            Output += BB;
+                                        Output += "\n";
+                                    }
+                                    WriteCLine($"A Non-Inverted, '{BB}' Filled Triangle of Height: {Len}");
                                     break;
                                 case "N":  // Unfilled
 
@@ -170,7 +182,7 @@ namespace CSharpFigureBuilder.ConsoleApp
 
                 Builder(ParsedLength, Shape, BuildingBlock);
             }
-
+            WriteCLine("That's it, press any key to end the program: ", ConsoleColor.Magenta, false);
             Console.ReadKey();
 
         }
