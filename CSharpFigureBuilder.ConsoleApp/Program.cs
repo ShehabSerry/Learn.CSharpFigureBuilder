@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharpFigureBuilder.ConsoleApp
 {
+    // As of what has been written on Sunday
     class Program
     {
         static int intValidator(string input)
