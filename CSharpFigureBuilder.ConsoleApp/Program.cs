@@ -9,73 +9,7 @@ namespace CSharpFigureBuilder.ConsoleApp
 {
     class Program
     {
-        //I will try to handle the builder function
-        //        case "1":  // triangle 
-        //                case "Y":  // inverted (Triangle)    
-        //                        case "N":  // Unfilled
-        //                            for (int row = Len; row > 0; row--)
-        //                            {
-        //                                if (row == Len)
-        //                                {
-        //                                    for (int BaseWidth = 1; BaseWidth < row * 2; BaseWidth++)  // if x = 5, base = 9: 4 - center - 4
-        //                                        Output += BB;
-        //                                    Output += "\n";
-        //                                    continue;
-        //                                }
-        //                                for (int spaces = Len - row; spaces > 0; spaces--)
-        //                                    Output += " ";
-
-        //                                for (int block = 1; block < row * 2; block++)
-        //                                {
-        //                                    if (block == 1 || block == (row * 2) - 1)
-        //                                        Output += BB;
-        //                                    else
-        //                                        Output += " ";
-        //                                }
-        //                                Output += "\n";
-        //                            }
-        //                            WriteCLine($"An Inverted, '{BB}' Unfilled Triangle of Height: {Len}");
-        //                            break;
-        //                        default:
-        //                            Success = false;
-        //                    }
-        //                    break;
-        //                case "N":  // not inverted (Triangle)
-        //                        case "N":  // Unfilled (Triangle)
-        //                            for (int row = 1; row <= Len; row++)
-        //                            {
-        //                                if (row == Len)
-        //                                {
-        //                                    for (int BaseWidth = 1; BaseWidth < row * 2; BaseWidth++)  // if x = 5, base = 9: 4 - center - 4
-        //                                        Output += BB;
-        //                                    break;
-        //                                }
-        //                                for (int spaces = Len - row; spaces > 0; spaces--)
-        //                                    Output += " ";
-
-        //                                for (int block = 1; block < row * 2; block++)
-        //                                {
-        //                                    if (block == 1 || block == (row * 2) - 1)
-        //                                        Output += BB;
-        //                                    else
-        //                                        Output += " ";
-        //                                }
-        //                                Output += "\n";
-        //                            }
-        //                            WriteCLine($"A Non-Inverted, '{BB}' Unfilled Triangle of Height: {Len}");
-        //                            break;
-        //                        default:
-        //                            Success = false;
-        //                            WriteCLine("Invalid input, start over", ConsoleColor.Red);
-        //                            break;
-        //                    }
-        //                    break;
-        //                default:
-        //                    Success = false;
-        //                    WriteCLine("Invalid input, start over", ConsoleColor.Red);
-        //                    break;
-        //            }
-        //            break;
+        //Leftover: WriteCLine($"An Inverted, '{BB}' Unfilled Triangle of Height: {Len}");
 
         //        case "2": // Diamond
         //            WriteCLine("Would you like to have your Diamond Filled? Y/N: ", newline: false);
@@ -214,7 +148,9 @@ namespace CSharpFigureBuilder.ConsoleApp
                         bool isFilled = fun.YNValidator(Filled);
                         Figure Fig = new(ParsedLength, BuildingBlock, Shape, isInverted, isFilled);
                         fun.Spammer('*', 54, ConsoleColor.Yellow);
-                        fun.WriteCLine(Fig.BuildFigure(), ConsoleColor.Green);
+                        fun.Spammer('-', 54);
+                        fun.WriteCLine($"\n{Fig.BuildFigure()}", ConsoleColor.Green);
+                        fun.Spammer('-', 54);
                     }
   
                     else if (Shape == "2")
@@ -225,7 +161,9 @@ namespace CSharpFigureBuilder.ConsoleApp
                         bool isFilled = fun.YNValidator(Filled);
                         Figure Fig = new(ParsedLength, BuildingBlock, Shape, isFilled);
                         fun.Spammer('*', 54, ConsoleColor.Yellow);
-                        fun.WriteCLine(Fig.BuildFigure(), ConsoleColor.Green);
+                        fun.Spammer('-', 54);
+                        fun.WriteCLine($"\n{Fig.BuildFigure()}", ConsoleColor.Green);
+                        fun.Spammer('-', 54);
                     }
                         
                     fun.WriteCLine("Would you like to Create Another Shape? Y/N: ", newline: false);
@@ -246,4 +184,3 @@ namespace CSharpFigureBuilder.ConsoleApp
         }
     }
 }
-
