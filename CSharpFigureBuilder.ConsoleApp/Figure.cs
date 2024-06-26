@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,81 +26,56 @@ namespace CSharpFigureBuilder.ConsoleApp
             Filled = Fill;
         }
 
-        // gotta scrap this approach it's still verbose
+        // Alt Cons for diamondd
+        public Figure(int Len, string BBlock, string shape, bool Fill)
+        {
+            Length = Len;
+            BuildingBlock = BBlock;
+            Shape = shape;
+            Filled = Fill;
+        }
 
         public string BuildFigure()
         {
             switch (Shape)
             {
                 case "1":  // Triangle
-                    if (Inverted)
-                        return BuildInvertedTriangle();
+                    if (Filled)
+                        return BuildFilledTriangle();
                     else
-                        return BuildNonInvertedTriangle();
+                        return BuildUnfilledTriangle();
                 case "2":  // Diamond
                     return BuildDiamond();
                 default:
                     return "Invalid shape! Start over";
             }
         }
-        public string BuildNonInvertedTriangle()
+        public string BuildFilledTriangle()
         {
             string Output = "";
-            if (Filled)  // Filled (Triangle)
+            int initial = Inverted ? Length : 1;
+            int stop = Inverted ? 0 : Length;  // ternary cond the result
+            int step = Inverted ? -1 : 1;  // decr incr
+            for (int row = initial; Inverted ? row > stop : row <= stop ; row += step)
             {
-                for (int row = 1; row <= Length; row++)
-                {
-                    for (int spaces = Length - row; spaces > 0; spaces--)
-                        Output += " ";
+                for (int spaces = Length - row; spaces > 0; spaces--)
+                    Output += " ";
 
+                for (int block = 0; block < row; block++)
+                    Output += BuildingBlock;
 
-                    for (int block = 0; block < row; block++)
-                        Output += BuildingBlock;
-
-                    for (int RHS = 0; RHS < row - 1; RHS++)
-                        Output += BuildingBlock;
-                    Output += "\n";
-                }
-                return Output;
+                for (int RHS = 0; RHS < row - 1; RHS++)
+                    Output += BuildingBlock;
+                Output += "\n";
             }
-            else  // Unfilled (Triangle)
-            {
-                for (int row = 1; row <= Length; row++)
-                {
-                    if (row == Length)
-                    {
-                        for (int BaseWidth = 1; BaseWidth < row * 2; BaseWidth++)  // if x = 5, base = 9: 4 - center - 4
-                            Output += BuildingBlock;
-                        break;
-                    }
-                    for (int spaces = Length - row; spaces > 0; spaces--)
-                        Output += " ";
-
-                    for (int block = 1; block < row * 2; block++)
-                    {
-                        if (block == 1 || block == (row * 2) - 1)
-                            Output += BuildingBlock;
-                        else
-                            Output += " ";
-                    }
-                    Output += "\n";
-                }
-                return Output;
-            }
-
-            
-
-
-            // func Tri invert >> filled or unfilled
-
-            // funt Diamond >> filled(extra) or unfilled
-
-
+            return Output;
         }
-        public string BuildInvertedTriangle()
+        public string BuildUnfilledTriangle()
         {
-            return "placeholder for now";
+            return "Placeholder for noww";
         }
+
+        // func Diamond >> filled(extra) or unfilled (utilising TriFilled & TriUnfilled
         public string BuildDiamond()
         {
             return "placeholder for now";

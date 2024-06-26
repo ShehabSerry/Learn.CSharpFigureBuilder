@@ -55,12 +55,17 @@ namespace CSharpFigureBuilder.ConsoleApp
             Console.WriteLine(output);
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public void YNValidator(string Choice)
+        public bool YNValidator(string Choice)
         {
-            if (Choice != "Y" && Choice != "N")
+            if (Choice == "Y")
+                return true;
+            else if (Choice == "N")
+                return false;
+            else
             {
                 WriteCLine("Invalid input, start over", ConsoleColor.Red);
-                return;
+                Environment.Exit(0);
+                return false;
             }
         }
     }

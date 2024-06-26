@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,31 +10,8 @@ namespace CSharpFigureBuilder.ConsoleApp
     class Program
     {
         //I will try to handle the builder function
-        //static void Builder(int Length, string Shape, string BuildingBlock)
-        //{
-        //    switch (Shape)
-        //    {
         //        case "1":  // triangle 
-        //            switch (Inversion)
-        //            {
         //                case "Y":  // inverted (Triangle)    
-        //                    switch (Filled)
-        //                    {
-        //                        case "Y":  // Filled
-        //                            for (int row = Len; row > 0; row--)
-        //                            {
-        //                                for (int spaces = Len - row; spaces > 0; spaces--)  // spacer
-        //                                    Output += " ";
-
-        //                                for (int block = 0; block < row; block++)
-        //                                    Output += BB;
-
-        //                                for (int RHS = 0; RHS < row - 1; RHS++)  // after centerline
-        //                                    Output += BB;
-        //                                Output += "\n";
-        //                            }
-        //                            WriteCLine($"An Inverted, '{BB}' Filled Triangle of Height: {Len}");
-        //                            break;
         //                        case "N":  // Unfilled
         //                            for (int row = Len; row > 0; row--)
         //                            {
@@ -60,29 +38,9 @@ namespace CSharpFigureBuilder.ConsoleApp
         //                            break;
         //                        default:
         //                            Success = false;
-
         //                    }
         //                    break;
         //                case "N":  // not inverted (Triangle)
-        //                    WriteCLine("Would you like to have your triangle Filled? Y/N: ", newline: false);
-        //                    Filled = ReadCLine(ConsoleColor.Yellow).ToUpper();
-        //                    switch (Filled)
-        //                    {
-        //                        case "Y":  // Filled (Triangle)
-        //                            for (int row = 1; row <= Len; row++)
-        //                            {
-        //                                for (int spaces = Len - row; spaces > 0; spaces--)
-        //                                    Output += " ";
-
-        //                                for (int block = 0; block < row; block++)
-        //                                    Output += BB;
-
-        //                                for (int RHS = 0; RHS < row - 1; RHS++)
-        //                                    Output += BB;
-        //                                Output += "\n";
-        //                            }
-        //                            WriteCLine($"A Non-Inverted, '{BB}' Filled Triangle of Height: {Len}");
-        //                            break;
         //                        case "N":  // Unfilled (Triangle)
         //                            for (int row = 1; row <= Len; row++)
         //                            {
@@ -243,18 +201,33 @@ namespace CSharpFigureBuilder.ConsoleApp
                     }
                     fun.Spammer('*', 54, ConsoleColor.Yellow);
 
-                    if(Shape == "1")
-                    {
-                        fun.WriteCLine("Would you like to have your triangle Inverted? Y/N: ", newline: false);
-                        string Inversion = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
-                        fun.YNValidator(Inversion);
-                        fun.WriteCLine("Would you like to have your triangle Filled? Y/N: ", newline: false);
-                        string Filled = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
-                        fun.YNValidator(Filled);
-                    }
-                    // make obj
-                    // future master function form Figure class (which calls smaller functions)
 
+                    string shapename = "";
+                    if (Shape == "1")
+                    {
+                        shapename = "Triangle";
+                        fun.WriteCLine($"Would you like to have your {shapename} Inverted? Y/N: ", newline: false);
+                        string Inversion = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
+                        bool isInverted = fun.YNValidator(Inversion);
+                        fun.WriteCLine($"Would you like to have your {shapename} Filled? Y/N: ", newline: false);
+                        string Filled = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
+                        bool isFilled = fun.YNValidator(Filled);
+                        Figure Fig = new(ParsedLength, BuildingBlock, Shape, isInverted, isFilled);
+                        fun.Spammer('*', 54, ConsoleColor.Yellow);
+                        fun.WriteCLine(Fig.BuildFigure(), ConsoleColor.Green);
+                    }
+  
+                    else if (Shape == "2")
+                    {
+                        shapename = "Diamond";
+                        fun.WriteCLine($"Would you like to have your {shapename} Filled? Y/N: ", newline: false);
+                        string Filled = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
+                        bool isFilled = fun.YNValidator(Filled);
+                        Figure Fig = new(ParsedLength, BuildingBlock, Shape, isFilled);
+                        fun.Spammer('*', 54, ConsoleColor.Yellow);
+                        fun.WriteCLine(Fig.BuildFigure(), ConsoleColor.Green);
+                    }
+                        
                     fun.WriteCLine("Would you like to Create Another Shape? Y/N: ", newline: false);
                     string Another = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
                     if (Another == "Y")
