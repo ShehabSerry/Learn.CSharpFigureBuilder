@@ -72,10 +72,39 @@ namespace CSharpFigureBuilder.ConsoleApp
         }
         public string BuildUnfilledTriangle()
         {
-            return "Placeholder for noww";
+            string Output = "";
+            int initial = Inverted ? Length -1 : 1;
+            int stop = Inverted ? 0 : Length - 1;
+            int step = Inverted ? -1 : 1;
+            if (Inverted)
+            {
+                for (int BaseWidth = 1; BaseWidth < Length * 2; BaseWidth++)
+                    Output += BuildingBlock;
+                Output += "\n";
+            }
+            for (int row = initial; Inverted ? row > stop : row <= stop; row += step)
+            {
+                for (int spaces = Length - row; spaces > 0; spaces--)
+                    Output += " ";
+
+                for (int block = 1; block < row * 2; block++)
+                {
+                    if (block == 1 || block == (row * 2) - 1)
+                        Output += BuildingBlock;
+                    else
+                        Output += " ";
+                }
+                Output += "\n";
+            }
+            if (!Inverted)
+            {
+                for (int BaseWidth = 1; BaseWidth < Length * 2; BaseWidth++)
+                    Output += BuildingBlock;
+                Output += "\n";
+            }
+            return Output;
         }
 
-        // func Diamond >> filled(extra) or unfilled (utilising TriFilled & TriUnfilled
         public string BuildDiamond()
         {
             return "placeholder for now";
