@@ -50,10 +50,12 @@ namespace CSharpFigureBuilder.ConsoleApp
                     return "Invalid shape! Start over";
             }
         }
-        public string BuildFilledTriangle()
+        public string BuildFilledTriangle(bool DiamondMaker = false)
         {
             string Output = "";
             int initial = Inverted ? Length : 1;
+            if (DiamondMaker && Inverted)
+                initial = Length - 1;
             int stop = Inverted ? 0 : Length;  // ternary cond the result
             int step = Inverted ? -1 : 1;  // decr incr
             for (int row = initial; Inverted ? row > stop : row <= stop ; row += step)
@@ -70,13 +72,15 @@ namespace CSharpFigureBuilder.ConsoleApp
             }
             return Output;
         }
-        public string BuildUnfilledTriangle()
+        public string BuildUnfilledTriangle(bool DiamondMaker = false)
         {
             string Output = "";
-            int initial = Inverted ? Length -1 : 1;
+            int initial = Inverted ? Length - 1 : 1;
+            if (DiamondMaker && Inverted)
+                initial = Length;
             int stop = Inverted ? 0 : Length - 1;
             int step = Inverted ? -1 : 1;
-            if (Inverted)
+            if (Inverted && !DiamondMaker)
             {
                 for (int BaseWidth = 1; BaseWidth < Length * 2; BaseWidth++)
                     Output += BuildingBlock;
@@ -96,7 +100,7 @@ namespace CSharpFigureBuilder.ConsoleApp
                 }
                 Output += "\n";
             }
-            if (!Inverted)
+            if (!Inverted && !DiamondMaker)
             {
                 for (int BaseWidth = 1; BaseWidth < Length * 2; BaseWidth++)
                     Output += BuildingBlock;
@@ -107,7 +111,20 @@ namespace CSharpFigureBuilder.ConsoleApp
 
         public string BuildDiamond()
         {
-            return "placeholder for now";
+            string Output = "";
+            if (Filled)
+            {
+                Output += BuildFilledTriangle(true);
+                Inverted = true;
+                Output += BuildFilledTriangle(true);
+            }
+            else
+            {
+                Output += BuildUnfilledTriangle(true);
+                Inverted = true;
+                Output += BuildUnfilledTriangle(true);
+            }
+            return Output; 
         }
     }
 }
