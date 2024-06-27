@@ -16,7 +16,8 @@ namespace CSharpFigureBuilder.ConsoleApp
             Functions fun = new();
             fun.WriteCLine("");
             fun.Spammer('*', 54, ConsoleColor.Cyan);
-            fun.WriteCLine("  SHAPE BUILDER CLI\n  This Program will prompt you to choose a character\n  Specify the Length\n  Pick a shape \n  Indicate whether it's Inverted or not \n  And indicate whether it's filled or not");
+            fun.WriteCLine("\n  SHAPE BUILDER CLI\nThis Program will prompt you to choose a character\nSpecify the Length\nPick a shape\nIndicate whether it's Inverted or not\nAnd indicate whether it's filled or not");
+            fun.WriteCLine("\n  ----- Rules -----\nComply with the prompts\nMax Length is 27\nThe Length can't be 0\nYou can use any ASCII character for a building block\n"); // todo set limit
             fun.Spammer('*', 54, ConsoleColor.Cyan);
             fun.WriteCLine("");
 
@@ -47,7 +48,7 @@ namespace CSharpFigureBuilder.ConsoleApp
                         string Shape = fun.ReadCLine(ConsoleColor.Yellow, true);
                     if (Shape != "1" && Shape != "2")
                     {
-                        fun.WriteCLine("Invalid input, pick from the listed choices", ConsoleColor.Red);
+                        fun.WriteCLine("Invalid input, ", ConsoleColor.Red, false);
                         goto retry;  // thx Esio
                     }
                     fun.Spammer('*', 54, ConsoleColor.Yellow);
