@@ -17,7 +17,7 @@ namespace CSharpFigureBuilder.ConsoleApp
             fun.WriteCLine("");
             fun.Spammer('*', 54, ConsoleColor.Cyan);
             fun.WriteCLine("\n  SHAPE BUILDER CLI\nThis Program will prompt you to choose a character\nSpecify the Length\nPick a shape\nIndicate whether it's Inverted or not\nAnd indicate whether it's filled or not");
-            fun.WriteCLine("\n  ----- Rules -----\nComply with the prompts\nMax Length is 27\nThe Length can't be 0\nYou can use any ASCII character for a building block\n"); // todo set limit
+            fun.WriteCLine("\n  ----- Rules -----\nComply with the prompts\nMax Length is 27\nThe Length can't be 0\nYou can use any ASCII character for a building block\n");
             fun.Spammer('*', 54, ConsoleColor.Cyan);
             fun.WriteCLine("");
 
@@ -28,13 +28,19 @@ namespace CSharpFigureBuilder.ConsoleApp
                 fun.WriteCLine("Please insert the length of your desired shape: ", newline: false);
                 string Length = fun.ReadCLine(ConsoleColor.Yellow);             
                 int ParsedLength = fun.intValidator(Length);
-                if (ParsedLength == 0)
+                if (ParsedLength == 0)  // could've just said || ParsedLength > 27
                 {
                     fun.WriteCLine("Invalid length, start over", ConsoleColor.Red);
                     return;
                 }
                 else
                 {
+                    if (ParsedLength > 27)
+                    {
+                        fun.WriteCLine("You went past the Length limit", ConsoleColor.Red);
+                        fun.WriteCLine("The length is now set to 27");
+                        ParsedLength = 27;
+                    }
                     fun.Spammer('*', 54, ConsoleColor.Yellow);
                     fun.Spammer('*', 54, ConsoleColor.Yellow);
                     fun.WriteCLine("Insert the char to be used as the building block: ", newline: false);
@@ -69,9 +75,9 @@ namespace CSharpFigureBuilder.ConsoleApp
                         string FillStatus = isFilled ? "Filled" : "Unfilled";
                         Figure Fig = new(ParsedLength, BuildingBlock, Shape, isInverted, isFilled);
                         fun.Spammer('*', 54, ConsoleColor.Yellow);
-                        fun.WriteCLine($"A{InversionStatus}, '{BuildingBlock}' {FillStatus} {shapename} of Height: {ParsedLength}");
                         
                         fun.Spammer('-', 54);
+                        fun.WriteCLine($"A{InversionStatus}, '{BuildingBlock}' {FillStatus} {shapename} of Height: {ParsedLength}");
                         fun.WriteCLine($"\n{Fig.BuildFigure()}", ConsoleColor.Green);
                         fun.Spammer('-', 54);
                     }
@@ -84,9 +90,9 @@ namespace CSharpFigureBuilder.ConsoleApp
                         string FillStatus = isFilled ? " Filled" : "n Unfilled";
                         Figure Fig = new(ParsedLength, BuildingBlock, Shape, isFilled);
                         fun.Spammer('*', 54, ConsoleColor.Yellow);
-                        fun.WriteCLine($"A{FillStatus} '{BuildingBlock}' {shapename} with centerline width of {ParsedLength}: ");
 
                         fun.Spammer('-', 54);
+                        fun.WriteCLine($"A{FillStatus} '{BuildingBlock}' {shapename} with centerline width of {ParsedLength}: ");
                         fun.WriteCLine($"\n{Fig.BuildFigure()}", ConsoleColor.Green);
                         fun.Spammer('-', 54);
                     }
