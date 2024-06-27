@@ -55,11 +55,11 @@ namespace CSharpFigureBuilder.ConsoleApp
             Console.WriteLine(output);
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public bool YNValidator(string Choice)
+        public bool YNValidator(string choice)
         {
-            if (Choice == "Y")
+            if (choice == "Y")
                 return true;
-            else if (Choice == "N")
+            else if (choice == "N")
                 return false;
             else
             {

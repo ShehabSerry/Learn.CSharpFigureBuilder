@@ -39,7 +39,7 @@ namespace CSharpFigureBuilder.ConsoleApp
         {
             switch (Shape)
             {
-                case "1":  // Triangle
+                case "1":  // Triangle, now those comments are just silly
                     if (Filled)
                         return BuildFilledTriangle();
                     else
@@ -115,7 +115,7 @@ namespace CSharpFigureBuilder.ConsoleApp
             if (Filled)
             {
                 Output += BuildFilledTriangle(true);
-                Inverted = true;
+                Inverted = true;  // flipper 
                 Output += BuildFilledTriangle(true);
             }
             else
