@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,12 +42,13 @@ namespace CSharpFigureBuilder.ConsoleApp
 
                     fun.Spammer('*', 54, ConsoleColor.Yellow);
                     fun.WriteCLine("Choose one from the listed shapes: \n  --[1] Triangle [1]-- \n  --[2] Diamond  [2]-- ");
-                    fun.WriteCLine("Insert your option: ", newline: false);
-                    string Shape = fun.ReadCLine(ConsoleColor.Yellow, true);
+                    retry:
+                        fun.WriteCLine("Insert your choice: ", newline: false);
+                        string Shape = fun.ReadCLine(ConsoleColor.Yellow, true);
                     if (Shape != "1" && Shape != "2")
                     {
-                        fun.WriteCLine("Invalid input, start over", ConsoleColor.Red);
-                        return;
+                        fun.WriteCLine("Invalid input, pick from the listed choices", ConsoleColor.Red);
+                        goto retry;  // thx Esio
                     }
                     fun.Spammer('*', 54, ConsoleColor.Yellow);
 
@@ -61,7 +63,7 @@ namespace CSharpFigureBuilder.ConsoleApp
                         string InversionStatus = isInverted ? "n Inverted" : " Non-Inverted";
 
                         fun.WriteCLine($"Would you like to have your {shapename} Filled? Y/N: ", newline: false);
-                        string Filled = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
+                        string Filled = fun.ReadCLine(ConsoleColor.Yellow); // I'll handle ToUpper() inside the function instead
                         bool isFilled = fun.YNValidator(Filled);
                         string FillStatus = isFilled ? "Filled" : "Unfilled";
                         Figure Fig = new(ParsedLength, BuildingBlock, Shape, isInverted, isFilled);
@@ -76,7 +78,7 @@ namespace CSharpFigureBuilder.ConsoleApp
                     {
                         shapename = "Diamond";
                         fun.WriteCLine($"Would you like to have your {shapename} Filled? Y/N: ", newline: false);
-                        string Filled = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
+                        string Filled = fun.ReadCLine(ConsoleColor.Yellow);
                         bool isFilled = fun.YNValidator(Filled);
                         string FillStatus = isFilled ? " Filled" : "n Unfilled";
                         Figure Fig = new(ParsedLength, BuildingBlock, Shape, isFilled);
@@ -89,16 +91,8 @@ namespace CSharpFigureBuilder.ConsoleApp
                     }
                         
                     fun.WriteCLine("Would you like to Create Another Shape? Y/N: ", newline: false);
-                    string Another = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
-                    if (Another == "Y")
-                        Again = true;  // useless line but I gotta do it
-                    else if (Another == "N")
-                        Again = false;
-                    else
-                    {
-                        fun.WriteCLine("Invalid input, start over", ConsoleColor.Red);
-                        return;
-                    }
+                    string AnotherShape = fun.ReadCLine(ConsoleColor.Yellow);
+                    Again = fun.YNValidator(AnotherShape);
                 }
             }
             fun.WriteCLine("That's it, press any key to end the program: ", ConsoleColor.Cyan, false);

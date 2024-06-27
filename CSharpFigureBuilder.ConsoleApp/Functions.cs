@@ -57,15 +57,15 @@ namespace CSharpFigureBuilder.ConsoleApp
         }
         public bool YNValidator(string choice)
         {
+            choice = choice.ToUpper();
             if (choice == "Y")
                 return true;
             else if (choice == "N")
                 return false;
             else
             {
-                WriteCLine("Invalid input, start over", ConsoleColor.Red);
-                Environment.Exit(0);
-                return false;
+                WriteCLine("Invalid input, insert either Y or N: ", ConsoleColor.Red, false);
+                return YNValidator(ReadCLine(ConsoleColor.Yellow));
             }
         }
     }
