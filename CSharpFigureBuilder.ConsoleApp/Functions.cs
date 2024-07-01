@@ -35,15 +35,14 @@ namespace CSharpFigureBuilder.ConsoleApp
             Console.ForegroundColor = color;
             if (single)
             {
-                int ascii = Console.ReadKey().KeyChar;
-                char charinput = (char)ascii;
+                char charinput = Console.ReadKey().KeyChar;
                 if (char.IsWhiteSpace(charinput))
                 {
                     WriteCLine("\nInvalid input, insert a valid value: ", ConsoleColor.Red, false);
                     return ReadCLine(ConsoleColor.Yellow, true);
                 }
                 Console.WriteLine();
-                return charinput.ToString();
+                return charinput.ToString(); // gotta return string
             }
             else
                 input = Console.ReadLine();
