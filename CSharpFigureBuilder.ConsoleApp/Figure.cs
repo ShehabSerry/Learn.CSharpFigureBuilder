@@ -18,7 +18,7 @@ namespace CSharpFigureBuilder.ConsoleApp
     {
         public int Length { get; set; }
         public string BuildingBlock { get; set; }
-        public ShapeType Shape { get; set; } // ceratin enums instead of random strings
+        public ShapeType Shape { get; set; } // certain enums instead of random strings
         public bool Inverted { get; set; }
         public bool Filled { get; set; }
 

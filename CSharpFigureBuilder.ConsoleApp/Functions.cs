@@ -52,9 +52,9 @@ namespace CSharpFigureBuilder.ConsoleApp
         public void Spammer(char sign, int len, ConsoleColor Color = ConsoleColor.White) // * input prompt, - output   char len color
         {
             Console.ForegroundColor = Color;
-            string output = ""; // El-Mahdy cautioned about excessive concat, I could use stringBuilder
+            StringBuilder output = new StringBuilder(len); // certain allocation
             for (int i = 0; i < len; i++)
-                output += sign;
+                output.Append(sign);
             Console.WriteLine(output);
             Console.ForegroundColor = ConsoleColor.White;
         }
