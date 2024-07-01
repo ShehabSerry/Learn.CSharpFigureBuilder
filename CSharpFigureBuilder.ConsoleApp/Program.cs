@@ -27,7 +27,7 @@ namespace CSharpFigureBuilder.ConsoleApp
             fun.WriteCLine("Please insert the length of your desired shape: ", newline: false);
             string Length = fun.ReadCLine(ConsoleColor.Yellow);             
             int ParsedLength = fun.intValidator(Length);
-            if (ParsedLength <= 0)  // not just zero but -ves
+            if (ParsedLength <= 0) 
             {
                 fun.WriteCLine("Invalid length, start over", ConsoleColor.Red);
                 return;
@@ -69,20 +69,18 @@ namespace CSharpFigureBuilder.ConsoleApp
 
 
             fun.Spammer('*', 54, ConsoleColor.Yellow);
+            fun.WriteCLine($"Would you like to have your {shapeType} Filled? Y/N: ", newline: false);
+            string Filled = fun.ReadCLine(ConsoleColor.Yellow);
+            bool isFilled = fun.YNValidator(Filled);
+            string FillStatus = isFilled ? "Filled" : "Unfilled";
             if (shapeType == ShapeType.Triangle)
             {
                 fun.WriteCLine($"Would you like to have your {shapeType} Inverted? Y/N: ", newline: false);
                 string Inversion = fun.ReadCLine(ConsoleColor.Yellow).ToUpper();
                 bool isInverted = fun.YNValidator(Inversion);
                 string InversionStatus = isInverted ? "n Inverted" : " Non-Inverted";
-
-                fun.WriteCLine($"Would you like to have your {shapeType} Filled? Y/N: ", newline: false);
-                string Filled = fun.ReadCLine(ConsoleColor.Yellow); // I'll handle ToUpper() inside the function instead
-                bool isFilled = fun.YNValidator(Filled);
-                string FillStatus = isFilled ? "Filled" : "Unfilled";
                 Figure Fig = new(ParsedLength, BuildingBlock, shapeType, isInverted, isFilled);
                 fun.Spammer('*', 54, ConsoleColor.Yellow);
-                
                 fun.Spammer('-', 54);
                 fun.WriteCLine($"A{InversionStatus}, '{BuildingBlock}' {FillStatus} {shapeType} of Height: {ParsedLength}");
                 fun.WriteCLine($"\n{Fig.BuildFigure()}", ConsoleColor.Green);
@@ -90,13 +88,8 @@ namespace CSharpFigureBuilder.ConsoleApp
             }
             else if (shapeType == ShapeType.Diamond)
             {
-                fun.WriteCLine($"Would you like to have your {shapeType} Filled? Y/N: ", newline: false);
-                string Filled = fun.ReadCLine(ConsoleColor.Yellow);
-                bool isFilled = fun.YNValidator(Filled);
-                string FillStatus = isFilled ? " Filled" : "n Unfilled";
                 Figure Fig = new(ParsedLength, BuildingBlock, shapeType, isFilled);
                 fun.Spammer('*', 54, ConsoleColor.Yellow);
-
                 fun.Spammer('-', 54);
                 fun.WriteCLine($"A{FillStatus} '{BuildingBlock}' {shapeType} with centerline width of {ParsedLength}: ");
                 fun.WriteCLine($"\n{Fig.BuildFigure()}", ConsoleColor.Green);
