@@ -53,8 +53,7 @@ namespace CSharpFigureBuilder.ConsoleApp
         {
             Console.ForegroundColor = Color;
             StringBuilder output = new StringBuilder(len); // certain allocation
-            for (int i = 0; i < len; i++)
-                output.Append(sign);
+            output.Append(sign, len); // why loop when Append repeat arg is like python str * times, gotta try this with shapebuilding even though less straight forward
             Console.WriteLine(output);
             Console.ForegroundColor = ConsoleColor.White;
         }
