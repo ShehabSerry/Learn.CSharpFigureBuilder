@@ -9,15 +9,20 @@ using System.Xml;
 
 namespace CSharpFigureBuilder.ConsoleApp
 {
+    public enum ShapeType // enum tab tab
+    {
+        Triangle,
+        Diamond
+    }
     public class Figure
     {
         public int Length { get; set; }
         public string BuildingBlock { get; set; }
-        public string Shape { get; set; }
+        public ShapeType Shape { get; set; } // ceratin enums instead of random strings
         public bool Inverted { get; set; }
         public bool Filled { get; set; }
 
-        public Figure(int Len, string BBlock, string shape, bool Inversion, bool Fill)
+        public Figure(int Len, string BBlock, ShapeType shape, bool Inversion, bool Fill)
         {
             Length = Len;
             BuildingBlock = BBlock;
@@ -27,7 +32,7 @@ namespace CSharpFigureBuilder.ConsoleApp
         }
 
         // Alt Cons for diamondd
-        public Figure(int Len, string BBlock, string shape, bool Fill)
+        public Figure(int Len, string BBlock, ShapeType shape, bool Fill)
         {
             Length = Len;
             BuildingBlock = BBlock;
@@ -39,12 +44,9 @@ namespace CSharpFigureBuilder.ConsoleApp
         {
             switch (Shape)
             {
-                case "1":  // Triangle, now those comments are just silly
-                    if (Filled)
-                        return BuildFilledTriangle();
-                    else
-                        return BuildUnfilledTriangle();
-                case "2":  // Diamond
+                case ShapeType.Triangle: // enums are Just about right
+                    return Filled ? BuildFilledTriangle() : BuildUnfilledTriangle();
+                case ShapeType.Diamond:
                     return BuildDiamond();
                 default:
                     return "Invalid shape! Start over";
