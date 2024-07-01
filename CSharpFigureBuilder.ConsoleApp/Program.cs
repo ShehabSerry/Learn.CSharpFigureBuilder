@@ -21,7 +21,8 @@ namespace CSharpFigureBuilder.ConsoleApp
             fun.Spammer('*', 54, ConsoleColor.Cyan);
             fun.WriteCLine("");
 
-            StartAgain:// I though of using a StartAgain label, Q is it bad code?
+
+            StartAgain:// I thought of using a StartAgain label, Q is it bad code?
             fun.Spammer('*', 54, ConsoleColor.Yellow);
             fun.WriteCLine("Please insert the length of your desired shape: ", newline: false);
             string Length = fun.ReadCLine(ConsoleColor.Yellow);             
@@ -38,35 +39,34 @@ namespace CSharpFigureBuilder.ConsoleApp
                 ParsedLength = 27;
             }
             fun.Spammer('*', 54, ConsoleColor.Yellow);
+
+
             fun.Spammer('*', 54, ConsoleColor.Yellow);
             fun.WriteCLine("Insert the char to be used as the building block: ", newline: false);
             string BuildingBlock = fun.ReadCLine(ConsoleColor.Yellow, true);
             fun.Spammer('*', 54, ConsoleColor.Yellow);
 
+
             fun.Spammer('*', 54, ConsoleColor.Yellow);
             ShapeType shapeType;
-            bool validShape = false; // assume not, keep asking till mett
-
             fun.WriteCLine("Choose one from the listed shapes: \n  --[1] Triangle [1]-- \n  --[2] Diamond  [2]-- ");
             retry:
             fun.WriteCLine("Your choice: ", newline: false);
             string shapeInput = fun.ReadCLine(ConsoleColor.Yellow, true);
-
             switch (shapeInput)
             {
                 case "1":
                     shapeType = ShapeType.Triangle;
-                    validShape = true;
                     break;
                 case "2":
                     shapeType = ShapeType.Diamond;
-                    validShape = true;
                     break;
                 default:
                     fun.WriteCLine("Invalid input, please try again.", ConsoleColor.Red);
                     goto retry;
-                    break;
             }
+            fun.Spammer('*', 54, ConsoleColor.Yellow);
+
 
             fun.Spammer('*', 54, ConsoleColor.Yellow);
             if (shapeType == ShapeType.Triangle)
